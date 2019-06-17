@@ -1,0 +1,42 @@
+<html><head>
+  <script src="amrnb.js" type="text/javascript"></script>
+  <script src="amrwb.js" type="text/javascript"></script>
+  <script src="amrwb-util.js" type="text/javascript"></script>
+  <script src="amrplayer.js" type="text/javascript"></script>
+</head>
+<body>
+<button onclick="playnb();">play amr-nb</button>
+<button onclick="playwb();">play amr-wb</button>
+<script type="text/javascript">
+var player;
+var download_success_cb=function(){
+  console.log("download success");
+  player.play();
+}
+var download_progress_cb=function(e){
+  console.log("download progress"+e);
+}
+var download_error_cb=function(){
+  console.log("download error");
+}
+var play_end_cb=function(){
+  player = undefined;
+  console.log("play end");
+}
+function playnb(){
+  if(player){
+    player.toggle();
+  }
+  player = new AmrPlayer('/amrnb.amr',download_success_cb,download_progress_cb,download_error_cb,play_end_cb);
+  //player = new AmrPlayer('http://127.0.0.1/amrnb.amr',download_success_cb,download_progress_cb,download_error_cb,play_end_cb);
+}
+function playwb(){
+  if(player){
+    player.toggle();
+  }
+  player = new AmrPlayer('/amrwb.amr',download_success_cb,download_progress_cb,download_error_cb,play_end_cb);
+  //player = new AmrPlayer('http://127.0.0.1/amrwb.amr',download_success_cb,download_progress_cb,download_error_cb,play_end_cb);
+}
+</script>
+</body>
+</html>
